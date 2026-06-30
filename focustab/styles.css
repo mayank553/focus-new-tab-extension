@@ -164,7 +164,7 @@ body {
 
 /* Daily quote — secondary typographic element below focus card */
 #daily-quote {
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-style: italic;
   font-weight: 300;
   letter-spacing: 0.03em;
