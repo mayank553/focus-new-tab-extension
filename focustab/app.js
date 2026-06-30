@@ -1,6 +1,7 @@
 import { getStorage, setStorage, initStorage } from './utils/storage.js';
 import { getTodayString, getTimeOfDay, isPastEightPM } from './utils/date.js';
 import { calculateStreak } from './utils/streak.js';
+import { getDailyQuote } from './features/feature1-daily-quote/quotes.js';
 
 // ── Wallpaper ───────────────────────────────────────────────────────────────
 async function initWallpaper() {
@@ -105,6 +106,11 @@ async function initReflection() {
   if (!alreadySaved) showModal();
 }
 
+// ── Daily Quote ──────────────────────────────────────────────────────────────
+function initDailyQuote() {
+  document.getElementById('daily-quote').textContent = getDailyQuote(new Date());
+}
+
 // ── Focus Mode Toggle ────────────────────────────────────────────────────────
 async function initFocusMode() {
   const { focus_mode } = await getStorage(['focus_mode']);
@@ -166,6 +172,7 @@ async function deleteTask(id) {
 // ── Init ─────────────────────────────────────────────────────────────────────
 async function init() {
   await initStorage();
+  initDailyQuote();
   await Promise.all([initWallpaper(), initGreeting(), initFocus(), renderTasks(), initFocusMode(), renderStreak(), initReflection()]);
 
   document.getElementById('focus-input').addEventListener('keydown', async (e) => {
